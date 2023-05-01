@@ -59,8 +59,23 @@ public class SistemaSuporte {
                     System.out.println(" ID: " + chamadoAtualizado.getId() +
                     ", data de abertura: " + chamadoAtualizado.getDataAbertura() + ", status: " + chamadoAtualizado.getStatus() + ", resolucao: " + chamadoAtualizado.getResolucao());
                 }
+                System.out.println("Digite palavra chave do chamado que deseja buscar: ");
+                System.out.print("Digite a palavra-chave: ");
+                String palavraChave = scanner.nextLine();
+                List<Chamado> chamadosEncontrados = buscarChamadosPorPalavraChave(palavraChave);
+                if (chamadosEncontrados.isEmpty()) {
+                    System.out.println("Nenhum chamado encontrado com a palavra-chave informada.");
+                } else {
+                    System.out.println("Chamados encontrados:");
+                    for (Chamado chamado : chamadosEncontrados) {
+                        System.out.println(" ID: " + chamado.getId() +
+                                ", funcionário: " + chamado.getFuncionarioAbertura().getNome() +
+                                ", equipamento: " + chamado.getEquipamento() +
+                                ", setor: " + chamado.getFuncionarioAbertura().getDepartamento() +
+                                ", resolução: " + chamado.getResolucao());
+                    }
+                }
             }
-            System.out.println();
             // Exibir menu de opções
             /*
              * boolean sair = false;
@@ -89,4 +104,19 @@ public class SistemaSuporte {
         }
         return null;
     }
+
+    public static List<Chamado> buscarChamadosPorPalavraChave(String palavraChave) {
+        List<Chamado> chamadosEncontrados = new ArrayList<>();
+        for (Chamado chamado : chamados) {
+            if (chamado.getFuncionarioAbertura().getNome().toLowerCase().contains(palavraChave.toLowerCase())
+                    || chamado.getEquipamento().toLowerCase().contains(palavraChave.toLowerCase())
+                    || chamado.getFuncionarioAbertura().getDepartamento().toLowerCase().contains(palavraChave.toLowerCase())
+                    || chamado.getDescricao().toLowerCase().contains(palavraChave.toLowerCase())
+                    || chamado.getResolucao().toLowerCase().contains(palavraChave.toLowerCase())) {
+                chamadosEncontrados.add(chamado);
+            }
+        }
+        return chamadosEncontrados;
+    }
+
 }

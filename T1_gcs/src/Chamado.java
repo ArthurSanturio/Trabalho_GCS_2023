@@ -109,4 +109,10 @@ class Chamado {
         this.dataConclusao = LocalDate.now(); // Data de conclusão é a data atual
         this.resolucao = resolucao;
     }
+
+    // O sistema deverá permitir localizar chamados por uma palavra-chave.
+    // A busca deverá ocorrer sobre os campos de nome do funcionário, descrição
+    // do equipamento, nome do setor, texto da solicitação, texto da resolução.
+
+
 }
