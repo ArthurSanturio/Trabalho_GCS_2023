@@ -48,15 +48,16 @@ public class SistemaSuporte {
                 System.out.println("Digite qual chamado deseja atualizar: ");
                 int idChamado = scanner.nextInt();
                 scanner.nextLine();
-                System.out.println("Digite a resolução");
-                String resolucao = scanner.nextLine();
-                Chamado chamadoAtualizado = buscarChamadoPorId(idChamado);
-                if(chamadoAtualizado != null) {
+                Chamado chamadoAtualizado = buscarChamadoPorId(idChamado); // Alterado a ordem do if abaixo para só pedir resolução se o ID existir.
+                if(chamadoAtualizado == null) {
+                    System.out.println("ID não encontrado");
+                }
+                else {
+                    System.out.println("Digite a resolução");
+                    String resolucao = scanner.nextLine();
                     chamadoAtualizado.setStatusConcluido(resolucao);
                     System.out.println(" ID: " + chamadoAtualizado.getId() +
                     ", data de abertura: " + chamadoAtualizado.getDataAbertura() + ", status: " + chamadoAtualizado.getStatus() + ", resolucao: " + chamadoAtualizado.getResolucao());
-                } else {
-                    System.out.println("ID não encontrado");
                 }
             }
             System.out.println();
